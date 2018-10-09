@@ -23,7 +23,6 @@ SELECT TOP (1000000) dt.[DayOfWeek]
       ,tr.[TipAmount]
       ,tr.[TollsAmount]
       ,tr.[TotalAmount]
-  FROM [dbo].[Trip] as tr
-  join
-  dbo.[Date] as dt
-  on tr.DateID = dt.DateID
+  FROM [dbo].[Trip] AS tr WITH (NOLOCK)
+  JOIN [dbo].[Date] AS dt WITH (NOLOCK)
+  ON tr.[DateID] = dt.[DateID]
