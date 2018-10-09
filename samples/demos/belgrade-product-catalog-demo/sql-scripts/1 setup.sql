@@ -14,13 +14,13 @@ GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE TO WebUserRole
 EXEC sp_addrolemember N'WebUserRole', N'WebUser' 
 GO
 
-DROP TABLE IF EXISTS Product
+DROP TABLE IF EXISTS [dbo].[Product]
 DROP SEQUENCE IF EXISTS ProductId
 GO
 
 CREATE SEQUENCE ProductId AS int START WITH 29
 
-CREATE TABLE Product (
+CREATE TABLE [dbo].[Product] (
 	ProductID int DEFAULT (NEXT VALUE FOR ProductId) PRIMARY KEY,
 	Name nvarchar(50) NOT NULL,
 	Color nvarchar(15) NULL,
@@ -45,11 +45,11 @@ FROM OPENJSON (@products) WITH(
 )
 GO
 
-DROP TABLE IF EXISTS Company
+DROP TABLE IF EXISTS [dbo].[Company]
 DROP SEQUENCE IF EXISTS CompanyId
 GO
 CREATE SEQUENCE CompanyId AS int START WITH 4
-CREATE TABLE Company (
+CREATE TABLE [dbo].[Company] (
 	CompanyID int PRIMARY KEY DEFAULT (NEXT VALUE FOR CompanyId),
 	Name nvarchar(50) NOT NULL,
 	Address nvarchar(100) NULL,
@@ -88,9 +88,9 @@ AS BEGIN
 END
 GO
 
-DROP PROCEDURE IF EXISTS dbo.UpdateProductFromJson
+DROP PROCEDURE IF EXISTS [dbo].[UpdateProductFromJson]
 GO
-CREATE PROCEDURE dbo.UpdateProductFromJson(@ProductID int, @ProductJson NVARCHAR(MAX))
+CREATE PROCEDURE [dbo].[UpdateProductFromJson](@ProductID int, @ProductJson NVARCHAR(MAX))
 AS BEGIN
 
 	UPDATE dbo.Product SET
